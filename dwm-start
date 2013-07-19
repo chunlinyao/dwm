@@ -1,0 +1,30 @@
+#!/bin/sh
+
+setoutput() {
+xrandr |grep VGA | grep -q " connected"
+dual=$?
+if [ $dual -eq 0 ]; then
+	#xrandr --output VGA1 --mode 1920x1080 --left-of LVDS1
+	xrandr --output VGA-0 --mode 1920x1080 --left-of DVI-0
+	#trayer --monitor 1 --widthtype request --transparent true &
+else
+	xrandr --output VGA-0 --off
+	#trayer --widthtype request --transparent true &
+fi
+}
+xmodmap -e "pointer = 1 2 3 5 4"
+update-notifiler &
+#pidgin &
+/etc/devmon.sh &
+owncloud &
+#urxvt &
+while true; do
+setoutput
+pidgin &
+dropbox start &
+gnome-sound-applet &
+wicd-gtk -t &
+~/thunderbird/thunderbird &
+hp-systray &
+dwm 2> ~/dwm.log
+done
