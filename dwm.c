@@ -2413,6 +2413,7 @@ updatesystray(void) {
 	w = w ? w + systrayspacing : 1;
  	x -= w;
 	XMoveResizeWindow(dpy, systray->win, x, selmon->by, w, bh);
+	XMapRaised(dpy, systray->win);
 	/* redraw background */
 	XSetForeground(dpy, dc.gc, dc.norm[ColBG].pixel);
 	XFillRectangle(dpy, systray->win, dc.gc, 0, 0, w, bh);
