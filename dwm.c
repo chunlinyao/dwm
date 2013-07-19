@@ -120,6 +120,7 @@ typedef struct {
 	int x, y, w, h;
 	XftColor norm[ColLast];
 	XftColor sel[ColLast];
+	XftColor urg[ColLast];
 	Drawable drawable;
 	GC gc;
 	struct {
@@ -1891,6 +1892,9 @@ setup(void) {
 	dc.sel[ColBorder] = getcolor(selbordercolor);
 	dc.sel[ColBG] = getcolor(selbgcolor);
 	dc.sel[ColFG] = getcolor(selfgcolor);
+	dc.urg[ColBorder] = getcolor(urgbordercolor);
+	dc.urg[ColBG] = getcolor(selbgcolor);
+	dc.urg[ColFG] = getcolor(selfgcolor);
 	dc.drawable = XCreatePixmap(dpy, root, DisplayWidth(dpy, screen), bh, DefaultDepth(dpy, screen));
 	dc.gc = XCreateGC(dpy, root, 0, NULL);
 	XSetLineAttributes(dpy, dc.gc, 1, LineSolid, CapButt, JoinMiter);
@@ -2431,8 +2435,11 @@ updatewmhints(Client *c) {
 			wmh->flags &= ~XUrgencyHint;
 			XSetWMHints(dpy, c->win, wmh);
 		}
-		else
+		else {
 			c->isurgent = (wmh->flags & XUrgencyHint) ? True : False;
+			if (c->isurgent)
+				XSetWindowBorder(dpy, c->win, dc.urg[ColBorder].pixel);
+		}
 		if(wmh->flags & InputHint)
 			c->neverfocus = !wmh->input;
 		else
