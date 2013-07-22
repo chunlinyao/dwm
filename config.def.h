@@ -17,6 +17,9 @@ static const Bool showbar           = True;     /* False means no bar */
 static const Bool topbar            = True;     /* False means bottom bar */
 static const Bool focusfollowmouse  = True;     /* True means focus follow mouse */
 
+/* False means using the scroll wheel on a window will not change focus */
+static const Bool focusonwheelscroll = False;
+
 /* tagging */
 static const char *tags[] = { ":)", "@", "W", "++", "5", "6", "7", "8", "9" };
 
@@ -32,9 +35,9 @@ static const Rule rules[] = {
 };
 
 /* layout(s) */
-static const float mfact      = 0.55; /* factor of master area size [0.05..0.95] */
+static const float mfact      = 0.618; /* factor of master area size [0.05..0.95] */
 static const int nmaster      = 1;    /* number of clients in master area */
-static const Bool resizehints = True; /* True means respect size hints in tiled resizals */
+static const Bool resizehints = False; /* True means respect size hints in tiled resizals */
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
@@ -65,8 +68,8 @@ static const char *filemgrcmd[]     = { "nautilus", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
-        { Mod1Mask|ControlMask,         XK_Delete, spawn,          SHCMD("sudo reboot") },
-        { Mod1Mask|ControlMask,         XK_End,    spawn,          SHCMD("sudo halt -p") },
+        { Mod1Mask|ControlMask,         XK_Delete, spawn,          SHCMD("gksudo -m reboot reboot") },
+        { Mod1Mask|ControlMask,         XK_End,    spawn,          SHCMD("gksudo -m poweroff halt -p") },
         { MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
         { MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
         { MODKEY|ShiftMask,             XK_Escape, spawn,          {.v = xkill } },

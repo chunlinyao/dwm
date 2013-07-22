@@ -15,7 +15,7 @@ static const unsigned int systrayspacing = 2;   /* systray spacing */
 static const Bool showsystray       = True;     /* False means no systray */
 static const Bool showbar           = True;     /* False means no bar */
 static const Bool topbar            = True;     /* False means bottom bar */
-static const Bool focusfollowmouse  = False;     /* True means focus follow mouse */
+static const Bool focusfollowmouse  = True;     /* True means focus follow mouse */
 
 /* False means using the scroll wheel on a window will not change focus */
 static const Bool focusonwheelscroll = False;
@@ -68,8 +68,8 @@ static const char *filemgrcmd[]     = { "nautilus", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
-        { Mod1Mask|ControlMask,         XK_Delete, spawn,          SHCMD("sudo reboot") },
-        { Mod1Mask|ControlMask,         XK_End,    spawn,          SHCMD("sudo halt -p") },
+        { Mod1Mask|ControlMask,         XK_Delete, spawn,          SHCMD("gksudo -m reboot reboot") },
+        { Mod1Mask|ControlMask,         XK_End,    spawn,          SHCMD("gksudo -m poweroff halt -p") },
         { MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
         { MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
         { MODKEY|ShiftMask,             XK_Escape, spawn,          {.v = xkill } },
