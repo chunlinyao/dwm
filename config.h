@@ -15,6 +15,7 @@ static const unsigned int systrayspacing = 2;   /* systray spacing */
 static const Bool showsystray       = True;     /* False means no systray */
 static const Bool showbar           = True;     /* False means no bar */
 static const Bool topbar            = True;     /* False means bottom bar */
+static const Bool focusfollowmouse  = False;     /* True means focus follow mouse */
 
 /* False means using the scroll wheel on a window will not change focus */
 static const Bool focusonwheelscroll = False;
